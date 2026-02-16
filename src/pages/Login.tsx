@@ -1,10 +1,10 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // @ts-ignore: external JS module without type declarations
 import { login } from "../API/try";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -19,20 +19,20 @@ const Login = () => {
   }>({});
 
   /* 🔹 Validation */
-  const validate = () => {
-    const newErrors: typeof errors = {};
+  // const validate = () => {
+  //   const newErrors: typeof errors = {};
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    }
+  //   if (!formData.email.trim()) {
+  //     newErrors.email = "Email is required";
+  //   }
 
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-    }
+  //   if (!formData.password.trim()) {
+  //     newErrors.password = "Password is required";
+  //   }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
 
   const navigate = useNavigate();
 
