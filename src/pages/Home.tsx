@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type Feature = {
   title: string;
@@ -29,12 +29,35 @@ const features: Feature[] = [
 ];
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login", { replace: true });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      
+      {/* 🔹 TOP BAR */}
+      <header className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+        <h1 className="text-xl font-bold text-gray-800">
+          Dashboard
+        </h1>
+
+        <button
+          onClick={handleLogout}
+          className="px-4 py-2 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+        >
+          Logout
+        </button>
+      </header>
+
       {/* HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-6 py-20 text-center">
+      <section className="max-w-7xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
-          Build <span className="text-blue-600">Modern Web Apps</span>  
+          Build <span className="text-blue-600">Modern Web Apps</span>
           <br /> with Confidence
         </h1>
 
