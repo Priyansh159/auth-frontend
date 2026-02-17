@@ -1,5 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
+import { logout } from "../store/authSlice";
+
 
 type Feature = {
   title: string;
@@ -31,11 +35,17 @@ const features: Feature[] = [
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
+  const dispatch = useAppDispatch();
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    dispatch(logout());
     navigate("/login", { replace: true });
   };
+
+
+  const user = useAppSelector((state) => state.auth);
+  console.log(user.name);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">

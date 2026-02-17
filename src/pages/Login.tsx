@@ -3,6 +3,9 @@ import type { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // @ts-ignore: external JS module without type declarations
 import { login } from "../API/try";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../store/authSlice";
+import { useAppDispatch } from "../store/hooks";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,26 +39,25 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+const dispatch = useAppDispatch();
+
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       const data = await login(formData);
 
-      // 🔐 Save auth info
-      localStorage.setItem("token", data.jwtToken);
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ email: data.email, name: data.name })
+      dispatch(
+        loginSuccess({
+          token: data.jwtToken,
+          email: data.email,
+          name: data.name,
+        })
       );
-
-      console.log("Login Success:", data);
 
       navigate("/home");
     } catch (error: any) {
-      console.error(
-        error?.response?.data?.message || "Login failed"
-      );
+      console.error(error?.response?.data?.message || "Login failed");
     }
   };
 
