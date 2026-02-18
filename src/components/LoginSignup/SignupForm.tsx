@@ -1,9 +1,8 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-// @ts-ignore
-import { ToastContainer, toast } from "react-toastify";
 import { signUp } from "../../API/try";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { toast } from "react-toastify";
 
 
 interface Props {
@@ -19,6 +18,7 @@ const SignupForm: React.FC<Props> = ({ switchMode }) => {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errors, setErrors] = useState<{
     name?: string;
     email?: string;
@@ -50,6 +50,7 @@ const SignupForm: React.FC<Props> = ({ switchMode }) => {
     try {
       const data = await signUp(formData);
       toast.success(data.message || "Signup successful 🎉");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(
         error?.response?.data?.message || "Signup failed"
