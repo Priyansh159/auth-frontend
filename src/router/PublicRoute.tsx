@@ -8,7 +8,7 @@ const PublicRoute: React.FC = () => {
 
   // If logged in → block login/signup
   if (isAuthenticated) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/main" replace />;
   }
 
   // If not logged in → allow access
