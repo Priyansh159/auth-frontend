@@ -1,5 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
+import { logout } from "../store/authSlice";
+
 
 type Feature = {
   title: string;
@@ -31,15 +35,37 @@ const features: Feature[] = [
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
+  const dispatch = useAppDispatch();
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login", { replace: true });
+    dispatch(logout());
+    navigate("/auth", { replace: true });
   };
+
+
+  const user = useAppSelector((state) => state.auth);
+  console.log(user.name);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      
+              {/* <LiquidEther
+                  colors={[ '#5227FF', '#FF9FFC', '#B19EEF' ]}
+                  mouseForce={20}
+                  cursorSize={100}
+                  isViscous
+                  viscous={30}
+                  iterationsViscous={32}
+                  iterationsPoisson={32}
+                  resolution={0.5}
+                  isBounce={false}
+                  autoDemo
+                  autoSpeed={0.5}
+                  autoIntensity={2.2}
+                  takeoverDuration={0.25}
+                  autoResumeDelay={3000}
+                  autoRampDuration={0.6}
+              /> */}
       {/* 🔹 TOP BAR */}
       <header className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
         <h1 className="text-xl font-bold text-gray-800">
@@ -68,16 +94,10 @@ const Home: React.FC = () => {
 
         <div className="mt-8 flex justify-center gap-4">
           <Link
-            to="/signup"
+            to="/auth"
             className="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
           >
             Get Started
-          </Link>
-          <Link
-            to="/login"
-            className="px-6 py-3 rounded-lg border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition"
-          >
-            Login
           </Link>
         </div>
       </section>
