@@ -1,26 +1,28 @@
-import FloatingLines from '../LoginSignup/FloatingLines'
+import FloatingLines from '../ReactBits/FloatingLines'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import MainPage from './components/MainPage'
 
 const HomeMain = () => {
   return (
-    <div style={{ width: '100%', height: '100vh', position: 'relative', backgroundColor: '#00000000' }}>
+    <div style={{ width: '100%', minHeight: '100vh', position: 'relative', backgroundColor: '#000000' }}>
 
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 z-0">
     <FloatingLines
-        enabledWaves={["top","middle","bottom"]}
-        lineCount={5}
-        lineDistance={5}
+        enabledWaves={["middle","top","bottom",]}
+        lineCount={[3,5,4]}
+        lineDistance={[5,7,3]}
         bendRadius={5}
         bendStrength={-0.5}
-        interactive={true}
+        interactive={false}
         parallax={true}
     />
     </div>
-    <Header />
-    <MainPage />
-    <Footer />
+    <div className="relative z-10">
+      <Header />
+      <MainPage />
+      <Footer />
+    </div>
     </div>
   )
 }
